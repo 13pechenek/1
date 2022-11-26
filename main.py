@@ -6,7 +6,7 @@ import datetime
 
 pygame.init()
 
-screen = pygame.display.set_mode((600, 600))
+screen = pygame.display.set_mode((1600, 900))
 clock = pygame.time.Clock()
 finished = False
 v=(0,0)

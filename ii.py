@@ -35,9 +35,12 @@ class enemy_type1:
     def enemy_move(self, player_x, player_y, self_x, self_y):
         r = ((player_x - self_x)**2 + (player_y - self_y)**2)**0.5
         if r >= 300:
+            self.able_to = False
             cos = (player_x - self_x)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
             sin = (player_y - self_y)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
-            v = (cos, sin)
+            v = (3*cos, 3*sin)
             return v
+        else:
+            self.able_to = True
         return (0, 0)
 
