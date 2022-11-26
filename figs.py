@@ -1,5 +1,6 @@
 import pygame as pg
-
+import math
+from random import random
 
 class Player:
     def __init__(self):
@@ -33,7 +34,14 @@ def draw_enemy(screen, x_enemy, y_enemy):
             (x_enemy+5, y_enemy-5)])
 
 
-class DrawBullet:
-    def type_1(self, screen, x_bullet, y_bullet):
-        pg.draw.circle(screen, (255, 255, 0), (x_bullet, y_bullet), 3)
-
+class shots:
+    class type_1:
+        def set_shot(self, bul_x, bul_y, sin, cos):
+            self.bul_x = bul_x
+            self.bul_y = bul_y
+            a = random() - 0.5
+            self.bul_v = (5*(a/5+cos), 5*(sin-a/5))
+        def draw_shot(self, screen):
+            self.bul_x += self.bul_v[0]
+            self.bul_y += self.bul_v[1]
+            pg.draw.circle(screen, (255, 0, 0), (self.bul_x, self.bul_y), 5)
