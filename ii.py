@@ -32,3 +32,12 @@ class enemy_type1:
             return bullet
         else:
             return None
+    def enemy_move(self, player_x, player_y, self_x, self_y):
+        r = ((player_x - self_x)**2 + (player_y - self_y)**2)**0.5
+        if r >= 300:
+            cos = (player_x - self_x)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
+            sin = (player_y - self_y)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
+            v = (cos, sin)
+            return v
+        return (0, 0)
+

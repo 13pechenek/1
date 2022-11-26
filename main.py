@@ -14,6 +14,8 @@ player = Player()
 player.__init__()
 enemy = enemy_type1()
 bullet=[]
+x_en = 500
+y_en = 500
 
 while not finished:
     clock.tick(60)
@@ -21,8 +23,11 @@ while not finished:
     v = controlls(v)
     player.v = v
     player.draw_player(screen)
-    draw_enemy(screen, 500, 500)
-    tbul = enemy.enemy_shot(player.x_player, player.y_player, 500, 500)
+    draw_enemy(screen, x_en, y_en)
+    v_en = enemy.enemy_move(player.x_player, player.y_player, x_en, y_en)
+    x_en += v_en[0]
+    y_en += v_en[1]
+    tbul = enemy.enemy_shot(player.x_player, player.y_player, x_en, y_en)
     if tbul != None:
         bullet.append(tbul)
     for b in bullet:
