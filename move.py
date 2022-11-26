@@ -1,4 +1,5 @@
 import pygame
+from figs import*
 from pygame.locals import*
 
 dir = {K_LEFT: (-5, 0), K_RIGHT: (5, 0), K_UP: (0, -5), K_DOWN: (0, 5)}
@@ -16,13 +17,11 @@ def controlls(v):
     return v
 
 def push(x, y):
-     for event in pygame.event.get():
+    for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
-            sin = (y - event.pos[1]) / ( (x - event.pos[0] )**2 + (y - event.pos[1])**2)**0.5 
-            cos = (x - event.pos[0]) / ( (x - event.pos[0] )**2 + (y - event.pos[1])**2)**0.5
-            shot = shots().type_1()
-            shot.set_shot(x, y, sin, cos)
-    if shot != None:
-        return shot
-    else:
-        return None
+            sin = -(y - event.pos[1]) / ( (x - event.pos[0] )**2 + (y - event.pos[1])**2)**0.5 
+            cos = -(x - event.pos[0]) / ( (x - event.pos[0] )**2 + (y - event.pos[1])**2)**0.5
+            bullet = shots().type_1()
+            bullet.set_shot(x, y, sin, cos)
+            return bullet
+    
