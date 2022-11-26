@@ -15,3 +15,14 @@ def controlls(v):
         v = (v[0] + dir[K_DOWN][0], v[1] +dir[K_DOWN][1])
     return v
 
+def push(x, y):
+     for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            sin = (y - event.pos[1]) / ( (x - event.pos[0] )**2 + (y - event.pos[1])**2)**0.5 
+            cos = (x - event.pos[0]) / ( (x - event.pos[0] )**2 + (y - event.pos[1])**2)**0.5
+            shot = shots().type_1()
+            shot.set_shot(x, y, sin, cos)
+    if shot != None:
+        return shot
+    else:
+        return None
