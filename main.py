@@ -7,6 +7,8 @@ from ii import *
 
 pygame.init()
 
+elozh = Push()
+
 screen = pygame.display.set_mode((1600, 900))
 clock = pygame.time.Clock()
 FINISHED = False
@@ -29,7 +31,7 @@ while not FINISHED:
     tbul = enemy.enemy_shot(player.x_player, player.y_player, X_EN, Y_EN)
     if tbul is not None:
         bullet.append(tbul)
-    u = push(player.x_player, player.y_player)
+    u = elozh.push(player.x_player, player.y_player)
     if u is not None:
         bullet.append(u)
     for b in bullet:
