@@ -1,37 +1,36 @@
-import pygame
-from figs import*
-from move import*
-from ii import*
 import datetime
+import pygame
+from figs import *
+from move import *
+from ii import *
+
 
 pygame.init()
 
 screen = pygame.display.set_mode((1600, 900))
 clock = pygame.time.Clock()
-finished = False
-v=(0,0)
+FINISHED = False
 player = Player()
-player.__init__()
-enemy = enemy_type1()
-bullet=[]
-x_en = 500
-y_en = 500
+enemy = EnemyTypeOne()
+bullet = []
+X_EN = 500
+Y_EN = 500
 
-while not finished:
+while not FINISHED:
     clock.tick(60)
-    screen.fill((0,0,0))
-    v = controlls(v)
-    player.v = v
+    screen.fill((0, 0, 0))
+    v = controlls()
+    player.v_player = v
     player.draw_player(screen)
-    draw_enemy(screen, x_en, y_en)
-    v_en = enemy.enemy_move(player.x_player, player.y_player, x_en, y_en)
-    x_en += v_en[0]
-    y_en += v_en[1]
-    tbul = enemy.enemy_shot(player.x_player, player.y_player, x_en, y_en)
-    if tbul != None:
+    draw_enemy(screen, X_EN, Y_EN)
+    v_en = enemy.enemy_move(player.x_player, player.y_player, X_EN, Y_EN)
+    X_EN += v_en[0]
+    Y_EN += v_en[1]
+    tbul = enemy.enemy_shot(player.x_player, player.y_player, X_EN, Y_EN)
+    if tbul is not None:
         bullet.append(tbul)
-    u= push(player.x_player,player.y_player)
-    if u !=None:
+    u = push(player.x_player, player.y_player)
+    if u is not None:
         bullet.append(u)
     for b in bullet:
         b.draw_shot(screen)
@@ -41,5 +40,5 @@ while not finished:
     for event in pygame.event.get():
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
-                finished= True
+                FINISHED = True
 pygame.quit()

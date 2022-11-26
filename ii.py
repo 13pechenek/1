@@ -1,11 +1,10 @@
-import math
 import datetime
-from figs import shots
+from figs import Shots
 
-class enemy_type1:
+
+class EnemyTypeOne:
     def __init__(self):
         self.bullets = 20
-        a = datetime.datetime.today()
         self.able_to = True
         self.time = ((
             datetime.datetime.today().hour * 60 * 60
@@ -23,7 +22,7 @@ class enemy_type1:
         if self.time - self.last_shot >= 4000000 and self.bullets == 0:
             self.bullets = 20
         if (self.able_to and self.time - self.last_shot >= 500000 and self.bullets != 0):
-            bullet = shots().type_1()
+            bullet = Shots().TypeOne()
             cos = (player_x - self_x)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
             sin = (player_y - self_y)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
             bullet.set_shot(self_x, self_y, sin, cos)
@@ -32,15 +31,15 @@ class enemy_type1:
             return bullet
         else:
             return None
+
     def enemy_move(self, player_x, player_y, self_x, self_y):
-        r = ((player_x - self_x)**2 + (player_y - self_y)**2)**0.5
-        if r >= 300:
+        r_to_player = ((player_x - self_x)**2 + (player_y - self_y)**2)**0.5
+        if r_to_player >= 300:
             self.able_to = False
             cos = (player_x - self_x)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
             sin = (player_y - self_y)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
-            v = (3*cos, 3*sin)
-            return v
+            v_enemy = (3*cos, 3*sin)
+            return v_enemy
         else:
             self.able_to = True
         return (0, 0)
-
