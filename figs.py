@@ -12,16 +12,10 @@ class Player:
     def draw_player(self, screen):
         self.x_player += self.v[0]
         self.y_player += self.v[1]
-        pg.draw.polygon(
-            screen,
-            (0, 255, 0),
-            [
-                (self.x_player + 5, self.y_player +5),
-                (self.x_player - 5, self.y_player + 5),
-                (self.x_player - 5, self.y_player - 5),
-                (self.x_player + 5, self.y_player - 5)
-                ]
-                )
+        img = pg.image.load('texture.png')
+        rect = pg.rect.Rect(self.x_player-5,self.y_player-5,10,10)
+        img = pg.transform.scale(img,(10,10))
+        screen.blit(img, rect)
 
 
 def draw_enemy(screen, x_enemy, y_enemy):

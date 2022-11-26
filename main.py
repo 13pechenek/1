@@ -30,6 +30,9 @@ while not finished:
     tbul = enemy.enemy_shot(player.x_player, player.y_player, x_en, y_en)
     if tbul != None:
         bullet.append(tbul)
+    u= push(player.x_player,player.y_player)
+    if u !=None:
+        bullet.append(u)
     for b in bullet:
         b.draw_shot(screen)
         if ((datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond) - b.l_time >= 2000000:
