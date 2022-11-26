@@ -2,6 +2,7 @@ import pygame
 from figs import*
 from move import*
 from ii import*
+import datetime
 
 pygame.init()
 
@@ -26,6 +27,8 @@ while not finished:
         bullet.append(tbul)
     for b in bullet:
         b.draw_shot(screen)
+        if ((datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond) - b.l_time >= 2000000:
+            bullet.remove(b)
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == KEYDOWN:

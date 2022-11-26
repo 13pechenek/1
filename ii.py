@@ -20,7 +20,9 @@ class enemy_type1:
             + datetime.datetime.today().minute * 60
             + datetime.datetime.today().second) * 1000000
             + datetime.datetime.today().microsecond)
-        if (self.able_to and self.time - self.last_shot >= 1000000 and self.bullets != 0):
+        if self.time - self.last_shot >= 4000000 and self.bullets == 0:
+            self.bullets = 20
+        if (self.able_to and self.time - self.last_shot >= 500000 and self.bullets != 0):
             bullet = shots().type_1()
             cos = (player_x - self_x)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
             sin = (player_y - self_y)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
