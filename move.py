@@ -18,11 +18,28 @@ def controlls():
     return player_v
 
 
-def push(player_x, player_y):
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            sin = -(player_y - event.pos[1]) / ((player_x - event.pos[0])**2 + (player_y - event.pos[1])**2)**0.5
-            cos = -(player_x - event.pos[0]) / ((player_x - event.pos[0])**2 + (player_y - event.pos[1])**2)**0.5
-            bullet = Shots().TypeOne()
-            bullet.set_shot(player_x, player_y, sin, cos)
-            return bullet
+
+
+
+class Push:
+    def __init__(self):
+        self.flag =False        
+        self.bullets = 10
+        self.time = (datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond
+        self.last_shot = 0
+
+    def push(self , player_x, player_y):
+        if pygame.mouse.get_pressed()[0]:
+            self.time = (datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond
+            if self.time - self.last_shot >= 4000000 and self.bullets == 0:
+                self.bullets = 10
+            if (self.time - self.last_shot >= 500000 and self.bullets != 0):
+                self.sin = -(player_y - pygame.mouse.get_pos()[1]) / ((player_x - pygame.mouse.get_pos()[0])**2 + (player_y - pygame.mouse.get_pos()[1])**2)**0.5
+                self.cos = -(player_x - pygame.mouse.get_pos()[0]) / ((player_x -pygame.mouse.get_pos()[0])**2 + (player_y - pygame.mouse.get_pos()[1])**2)**0.5
+                bullet = Shots().TypeOne()
+                bullet.set_shot(player_x, player_y, self.sin, self.cos)
+                self.last_shot = self.time
+                self.bullets-=1
+                return bullet 
+    
+        
