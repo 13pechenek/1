@@ -10,6 +10,13 @@ class Player:
         self.v_player = (0, 0)
         self.h_player = 5
 
+    def our_lives(self, screen):
+        img = pg.image.load('love1.jpg')
+        img = pg.transform.scale(img, (40,40))
+        for i in range(self.h_player):
+            rect = pg.rect.Rect(i*50+100, 45, 35, 35)
+            screen.blit(img, rect)
+
     def draw_player(self, screen, cord_mas):
         for i in range(20):
             if self.v_player != (0,0):

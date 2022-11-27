@@ -43,6 +43,7 @@ while not FINISHED:
     draw_walls(screen, player_and_walls_cord)
     player.v_player = v
     player.draw_player(screen, player_and_walls_cord)
+    player.our_lives(screen)
     f = 0
     for e in enemies:
         f+=1
