@@ -45,14 +45,10 @@ class Enemy:
                 cord_mas[int(self.x_enemy) - 5 + i][ int(self.y_enemy) -5 + j] = 0
         self.x_enemy += self.v_enemy[0]
         self.y_enemy += self.v_enemy[1]
-        pg.draw.polygon(
-            screen,
-            (255, 0, 0),
-            [
-                (self.x_enemy+5, self.y_enemy+5),
-                (self.x_enemy-5, self.y_enemy+5),
-             (self.x_enemy-5, self.y_enemy-5),
-                (self.x_enemy+5, self.y_enemy-5)])
+        img = pg.image.load('ang.jpg')
+        Is = pg.transform.smoothscale(img, (10,10))
+        rect = pg.rect.Rect(self.x_enemy-5, self.y_enemy-5, 10, 10)
+        screen.blit(img, rect)
         for i in range(10):
             for j in range(10):
                 cord_mas[int(self.x_enemy) - 5 + i][ int(self.y_enemy) -5 + j] = t+1
