@@ -28,8 +28,7 @@ for i in range(1600):
     for j in range(862):
         a.append(0)
     player_and_walls_cord.append(a)
-X_EN = 500
-Y_EN = 500
+
 
 while not FINISHED:
     clock.tick(60)
@@ -38,7 +37,7 @@ while not FINISHED:
     player.v_player = v
     player.draw_player(screen, player_and_walls_cord)
     enemyd.v_enemy = enemy.enemy_move(player.x_player, player.y_player, enemyd.x_enemy, enemyd.y_enemy)
-    enemyd.draw_enemy(screen, player_and_walls_cord)
+    enemyd.draw_enemy(screen, player_and_walls_cord, 1)
     tbul = enemy.enemy_shot(player.x_player, player.y_player, enemyd.x_enemy,enemyd.y_enemy)
     if tbul is not None:
         bullet.append(tbul)
@@ -46,7 +45,7 @@ while not FINISHED:
     if u is not None:
         bullet.append(u)
     for b in bullet:
-        b.draw_shot(screen, bullet_cord, player_and_walls_cord)
+        b.draw_shot(screen, bullet_cord, player_and_walls_cord, 1)
         if b.h_pl:
             player.h_player -= 1
         if player.h_player == 0:
