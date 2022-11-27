@@ -8,7 +8,8 @@ from Walls import*
 pygame.init()
 
 elozh = Push()
-
+img1 = pg.image.load('walllllll.png')
+img2 = pg.image.load('waaaaaaaaaaaallllllllll.png')
 screen = pygame.display.set_mode((1600, 862))
 clock = pygame.time.Clock()
 FINISHED = False
@@ -17,7 +18,7 @@ bullet = []
 bullet_cord = []
 player_and_walls_cord = []
 enemies =[]
-for i in range(5):
+for i in range(30):
     e = Enemy()
     enemies.append(e)
 
@@ -40,7 +41,7 @@ while not FINISHED:
     clock.tick(60)
     screen.fill((0,0,0))
     v = controlls()
-    draw_walls(screen, player_and_walls_cord)
+    draw_walls(screen, player_and_walls_cord, img1, img2)
     player.v_player = v
     player.draw_player(screen, player_and_walls_cord)
     player.our_lives(screen)

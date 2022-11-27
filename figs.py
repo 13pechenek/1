@@ -9,13 +9,15 @@ class Player:
         self.y_player = 300
         self.v_player = (0, 0)
         self.h_player = 5
+        self.img = pg.image.load('texture.bmp')
+        img = pg.image.load('love1.png')
+        self.img1 = pg.transform.scale(img, (40,40))
 
     def our_lives(self, screen):
-        img = pg.image.load('love1.png')
-        img = pg.transform.scale(img, (40,40))
+        
         for i in range(self.h_player):
             rect = pg.rect.Rect(i*50+100, 45, 35, 35)
-            screen.blit(img, rect)
+            screen.blit(self.img1, rect)
 
     def draw_player(self, screen, cord_mas):
         for i in range(20):
@@ -28,15 +30,16 @@ class Player:
                 cord_mas[int(self.x_player) - 10 + i][ int(self.y_player) -20 + j] = 0
         self.x_player += self.v_player[0]
         self.y_player += self.v_player[1]
-        img = pg.image.load('texture.bmp')
         rect = pg.rect.Rect(self.x_player - 10, self.y_player - 20, 20, 40)
-        screen.blit(img, rect)
+        screen.blit(self.img, rect)
         for i in range(20):
             for j in range(40):
                 cord_mas[int(self.x_player) - 10 + i][ int(self.y_player) -20 + j] = 1
                 
 class Enemy:
     def __init__(self):
+        img = pg.image.load('ang.jpg')
+        self.Is = pg.transform.smoothscale(img, (10,10))
         self.x_enemy = randint(100,1500)
         self.y_enemy = randint(200,600)
         self.v_enemy = (0, 0)
@@ -56,10 +59,8 @@ class Enemy:
                 cord_mas[int(self.x_enemy) - 5 + i][ int(self.y_enemy) -5 + j] = 0
         self.x_enemy += self.v_enemy[0]
         self.y_enemy += self.v_enemy[1]
-        img = pg.image.load('ang.jpg')
-        Is = pg.transform.smoothscale(img, (10,10))
         rect = pg.rect.Rect(self.x_enemy-5, self.y_enemy-5, 10, 10)
-        screen.blit(img, rect)
+        screen.blit(self.Is, rect)
         for i in range(10):
             for j in range(10):
                 cord_mas[int(self.x_enemy) - 5 + i][ int(self.y_enemy) -5 + j] = t+1
