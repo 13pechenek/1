@@ -8,6 +8,7 @@ class Player:
         self.x_player = 300
         self.y_player = 300
         self.v_player = (0, 0)
+        self.h_player = 3
 
     def draw_player(self, screen, cord_mas):
         for i in range(20):
@@ -123,3 +124,4 @@ class Shots:
                     self.h_en = True
                 if h2:
                     self.h_pl = True
+                

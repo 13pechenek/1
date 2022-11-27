@@ -47,6 +47,12 @@ while not FINISHED:
         bullet.append(u)
     for b in bullet:
         b.draw_shot(screen, bullet_cord, player_and_walls_cord)
+        if b.h_pl:
+            player.h_player -= 1
+        if player.h_player == 0:
+            FINISHED = True
+
+
         if ((datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond) - b.l_time >= 1000000 or b.live == 0:
             bullet.remove(b)
     pygame.display.update()
