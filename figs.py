@@ -12,6 +12,11 @@ class Player:
 
     def draw_player(self, screen, cord_mas):
         for i in range(20):
+            if self.v_player != (0,0):
+                for j in range(40):
+                    if cord_mas[int(self.x_player +self.v_player[0]) - 10 + i][ int(self.y_player+self.v_player[1]) -20 + j] != 0 and cord_mas[int(self.x_player +self.v_player[0]) - 10 + i][ int(self.y_player+self.v_player[1]) -20 + j] != 1:
+                        self.v_player= (0,0)
+        for i in range(20):
             for j in range(40):
                 cord_mas[int(self.x_player) - 10 + i][ int(self.y_player) -20 + j] = 0
         self.x_player += self.v_player[0]

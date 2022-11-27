@@ -59,6 +59,18 @@ class Shots:
                             j = 0
                         h = True
                         h2 = True
+                    if (player_mas[round(self.bul_x) + i][round(self.bul_y) + j] == -1 or player_mas[round(self.bul_x) + i][round(self.bul_y) - j] == -1 or player_mas[round(self.bul_x) - i][round(self.bul_y) + j] == -1 or player_mas[round(self.bul_x) - i][round(self.bul_y) - j] == -1 ):
+                        i, j = 0, 0
+                        while i**2 + j**2 <= 49:
+                            while i**2 + j**2 <= 49:
+                                cord_mas[round(self.bul_x) + i][round(self.bul_y) + j] = 0
+                                cord_mas[round(self.bul_x) - i][round(self.bul_y) + j] = 0
+                                cord_mas[round(self.bul_x) - i][round(self.bul_y) - j] = 0
+                                cord_mas[round(self.bul_x) + i][round(self.bul_y) - j] = 0
+                                j += 1
+                            i += 1
+                            j = 0
+                        h = True
                     for t in range(g):
                         if (player_mas[round(self.bul_x) + i][round(self.bul_y) + j] == t+2 or player_mas[round(self.bul_x) + i][round(self.bul_y) - j] == t+2 or player_mas[round(self.bul_x) - i][round(self.bul_y) + j] == t+2 or player_mas[round(self.bul_x) - i][round(self.bul_y) - j] == t+2 ) and self.type == 0:
                             i, j = 0, 0

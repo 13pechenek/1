@@ -2,6 +2,7 @@ import datetime
 import pygame
 from figs import *
 from move import *
+from Walls import*
 
 
 pygame.init()
@@ -23,12 +24,15 @@ for i in range(5):
 for i in range(1600):
     a=[]
     for j in range(862):
-        a.append(0)
+        a.append(0)   
     bullet_cord.append(a)
 for i in range(1600):
     a=[]
     for j in range(862):
-        a.append(0)
+        if i<=40 or i>=1560 or j <= 5 or j >= 855:
+            a.append(-1)
+        else:
+            a.append(0)
     player_and_walls_cord.append(a)
 
 
@@ -36,6 +40,7 @@ while not FINISHED:
     clock.tick(60)
     screen.fill((0,0,0))
     v = controlls()
+    draw_walls(screen, player_and_walls_cord)
     player.v_player = v
     player.draw_player(screen, player_and_walls_cord)
     f = 0
