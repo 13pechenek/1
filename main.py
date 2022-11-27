@@ -13,11 +13,14 @@ screen = pygame.display.set_mode((1600, 862))
 clock = pygame.time.Clock()
 FINISHED = False
 player = Player()
-enemy = EnemyTypeOne()
-enemyd = Enemy()
 bullet = []
 bullet_cord = []
 player_and_walls_cord = []
+enemies =[]
+for i in range(5):
+    e = Enemy()
+    enemies.append(e)
+
 for i in range(1600):
     a=[]
     for j in range(862):
@@ -36,18 +39,23 @@ while not FINISHED:
     v = controlls()
     player.v_player = v
     player.draw_player(screen, player_and_walls_cord)
-    enemyd.v_enemy = enemy.enemy_move(player.x_player, player.y_player, enemyd.x_enemy, enemyd.y_enemy)
-    enemyd.draw_enemy(screen, player_and_walls_cord, 1)
-    tbul = enemy.enemy_shot(player.x_player, player.y_player, enemyd.x_enemy,enemyd.y_enemy)
-    if tbul is not None:
-        bullet.append(tbul)
+    f = 0
+    for e in enemies:
+        f+=1
+        tbul = e.draw_enemy(screen, player_and_walls_cord,f,player.x_player, player.y_player)
+        if tbul is not None:
+            bullet.append(tbul)
     u = elozh.push(player.x_player, player.y_player)
     if u is not None:
         bullet.append(u)
     for b in bullet:
-        b.draw_shot(screen, bullet_cord, player_and_walls_cord, 1)
+        b.draw_shot(screen, bullet_cord, player_and_walls_cord, len(enemies))
         if b.h_pl:
             player.h_player -= 1
+        if b.h_en != 0:
+            enemies[b.h_en-1].lives -=1
+            if enemies[b.h_en-1].lives == 0:
+                enemies.remove(enemies[b.h_en-1])
         if player.h_player == 0:
             FINISHED = True
 
