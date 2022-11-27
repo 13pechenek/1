@@ -2,7 +2,6 @@ import datetime
 import pygame
 from figs import *
 from move import *
-from ii import *
 
 
 pygame.init()
