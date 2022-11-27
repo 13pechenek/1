@@ -29,7 +29,10 @@ class Enemy:
         self.v_enemy = (0, 0)
 
     
-    def draw_enemy(self, screen):
+    def draw_enemy(self, screen, cord_mas):
+        for i in range(10):
+            for j in range(10):
+                cord_mas[int(self.x_enemy) - 5 + i][ int(self.y_enemy) -5 + j] = 0
         self.x_enemy += self.v_enemy[0]
         self.y_enemy += self.v_enemy[1]
         pg.draw.polygon(
@@ -40,6 +43,9 @@ class Enemy:
                 (self.x_enemy-5, self.y_enemy+5),
              (self.x_enemy-5, self.y_enemy-5),
                 (self.x_enemy+5, self.y_enemy-5)])
+        for i in range(10):
+            for j in range(10):
+                cord_mas[int(self.x_enemy) - 5 + i][ int(self.y_enemy) -5 + j] = 2
 
 
 class Shots:
@@ -56,6 +62,8 @@ class Shots:
             a_rand = random() - 0.5
             self.bul_v = (5*(a_rand/5+cos), 5*(sin-a_rand/5))
             self.type = typ
+            self.h_en = False
+            self.h_pl = False
 
         def draw_shot(self, screen, cord_mas, player_mas):
             i, j = 0, 0
@@ -72,7 +80,7 @@ class Shots:
             self.bul_y += self.bul_v[1]
             pg.draw.circle(screen, (255, 0, 0), (self.bul_x, self.bul_y), 7)
             i, j = 0, 0
-            h = False
+            h, h1, h2 = False, False, False
             while i**2 + j**2 <= 49 and not h:
                 while i**2 + j**2 <= 49 and not h:
                     if (player_mas[round(self.bul_x) + i][round(self.bul_y) + j] == 1 or player_mas[round(self.bul_x) + i][round(self.bul_y) - j] == 1 or player_mas[round(self.bul_x) - i][round(self.bul_y) + j] == 1 or player_mas[round(self.bul_x) - i][round(self.bul_y) - j] == 1 ) and self.type == 1:
@@ -87,6 +95,20 @@ class Shots:
                             i += 1
                             j = 0
                         h = True
+                        h2 = True
+                    if (player_mas[round(self.bul_x) + i][round(self.bul_y) + j] == 2 or player_mas[round(self.bul_x) + i][round(self.bul_y) - j] == 2 or player_mas[round(self.bul_x) - i][round(self.bul_y) + j] == 2 or player_mas[round(self.bul_x) - i][round(self.bul_y) - j] == 2 ) and self.type == 0:
+                        i, j = 0, 0
+                        while i**2 + j**2 <= 49:
+                            while i**2 + j**2 <= 49:
+                                cord_mas[round(self.bul_x) + i][round(self.bul_y) + j] = 0
+                                cord_mas[round(self.bul_x) - i][round(self.bul_y) + j] = 0
+                                cord_mas[round(self.bul_x) - i][round(self.bul_y) - j] = 0
+                                cord_mas[round(self.bul_x) + i][round(self.bul_y) - j] = 0
+                                j += 1
+                            i += 1
+                            j = 0
+                        h = True
+                        h1 = True
                     else:
                         cord_mas[round(self.bul_x) + i][round(self.bul_y) + j] = 1
                         cord_mas[round(self.bul_x) - i][round(self.bul_y) + j] = 1
@@ -95,5 +117,9 @@ class Shots:
                     j += 1
                 i += 1
                 j = 0
-            if h is True:
+            if h:
                 self.live = 0
+                if h1:
+                    self.h_en = True
+                if h2:
+                    self.h_pl = True

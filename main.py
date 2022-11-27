@@ -38,7 +38,7 @@ while not FINISHED:
     player.v_player = v
     player.draw_player(screen, player_and_walls_cord)
     enemyd.v_enemy = enemy.enemy_move(player.x_player, player.y_player, enemyd.x_enemy, enemyd.y_enemy)
-    enemyd.draw_enemy(screen)
+    enemyd.draw_enemy(screen, player_and_walls_cord)
     tbul = enemy.enemy_shot(player.x_player, player.y_player, enemyd.x_enemy,enemyd.y_enemy)
     if tbul is not None:
         bullet.append(tbul)
