@@ -25,7 +25,7 @@ class EnemyTypeOne:
             bullet = Shots().TypeOne()
             cos = (player_x - self_x)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
             sin = (player_y - self_y)/(((player_x - self_x)**2 + (player_y - self_y)**2)**0.5)
-            bullet.set_shot(self_x, self_y, sin, cos)
+            bullet.set_shot(self_x, self_y, sin, cos, 1)
             self.bullets -= 1
             self.last_shot = self.time
             return bullet
