@@ -37,7 +37,7 @@ class Push:
                 self.sin = -(player_y - pygame.mouse.get_pos()[1]) / ((player_x - pygame.mouse.get_pos()[0])**2 + (player_y - pygame.mouse.get_pos()[1])**2)**0.5
                 self.cos = -(player_x - pygame.mouse.get_pos()[0]) / ((player_x -pygame.mouse.get_pos()[0])**2 + (player_y - pygame.mouse.get_pos()[1])**2)**0.5
                 bullet = Shots().TypeOne()
-                bullet.set_shot(player_x, player_y, self.sin, self.cos, 0)
+                bullet.set_shot(player_x, player_y, self.sin, self.cos)
                 self.last_shot = self.time
                 self.bullets-=1
                 return bullet 
