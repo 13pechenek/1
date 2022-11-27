@@ -11,7 +11,7 @@ class Player:
         self.h_player = 5
 
     def our_lives(self, screen):
-        img = pg.image.load('love1.jpg')
+        img = pg.image.load('love1.png')
         img = pg.transform.scale(img, (40,40))
         for i in range(self.h_player):
             rect = pg.rect.Rect(i*50+100, 45, 35, 35)
