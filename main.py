@@ -14,6 +14,7 @@ clock = pygame.time.Clock()
 FINISHED = False
 player = Player()
 enemy = EnemyTypeOne()
+enemyd = Enemy()
 bullet = []
 bullet_cord = []
 player_and_walls_cord = []
@@ -32,15 +33,13 @@ Y_EN = 500
 
 while not FINISHED:
     clock.tick(60)
-    screen.fill((0, 0, 0))
+    screen.fill((0,0,0))
     v = controlls()
     player.v_player = v
     player.draw_player(screen, player_and_walls_cord)
-    draw_enemy(screen, X_EN, Y_EN)
-    v_en = enemy.enemy_move(player.x_player, player.y_player, X_EN, Y_EN)
-    X_EN += v_en[0]
-    Y_EN += v_en[1]
-    tbul = enemy.enemy_shot(player.x_player, player.y_player, X_EN, Y_EN)
+    enemyd.v_enemy = enemy.enemy_move(player.x_player, player.y_player, enemyd.x_enemy, enemyd.y_enemy)
+    enemyd.draw_enemy(screen)
+    tbul = enemy.enemy_shot(player.x_player, player.y_player, enemyd.x_enemy,enemyd.y_enemy)
     if tbul is not None:
         bullet.append(tbul)
     u = elozh.push(player.x_player, player.y_player)

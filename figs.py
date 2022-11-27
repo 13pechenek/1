@@ -22,16 +22,24 @@ class Player:
             for j in range(40):
                 cord_mas[int(self.x_player) - 10 + i][ int(self.y_player) -20 + j] = 1
 
+class Enemy:
+    def __init__(self):
+        self.x_enemy = 400
+        self.y_enemy = 400
+        self.v_enemy = (0, 0)
 
-def draw_enemy(screen, x_enemy, y_enemy):
-    pg.draw.polygon(
-        screen,
-        (255, 0, 0),
-        [
-            (x_enemy+5, y_enemy+5),
-            (x_enemy-5, y_enemy+5),
-            (x_enemy-5, y_enemy-5),
-            (x_enemy+5, y_enemy-5)])
+    
+    def draw_enemy(self, screen):
+        self.x_enemy += self.v_enemy[0]
+        self.y_enemy += self.v_enemy[1]
+        pg.draw.polygon(
+            screen,
+            (255, 0, 0),
+            [
+                (self.x_enemy+5, self.y_enemy+5),
+                (self.x_enemy-5, self.y_enemy+5),
+             (self.x_enemy-5, self.y_enemy-5),
+                (self.x_enemy+5, self.y_enemy-5)])
 
 
 class Shots:
