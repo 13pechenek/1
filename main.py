@@ -15,58 +15,56 @@ clock = pygame.time.Clock()
 FINISHED = False
 player = Player()
 bullet = []
-bullet_cord = []
-player_and_walls_cord = []
-enemies =[]
+enemies = []
 for i in range(30):
     e = Enemy()
     enemies.append(e)
 
-for i in range(1600):
-    a=[]
-    for j in range(862):
-        a.append(0)   
-    bullet_cord.append(a)
-for i in range(1600):
-    a=[]
-    for j in range(862):
-        if i<=40 or i>=1560 or j <= 5 or j >= 855:
-            a.append(-1)
-        else:
-            a.append(0)
-    player_and_walls_cord.append(a)
-
-
 while not FINISHED:
     clock.tick(60)
-    screen.fill((0,0,0))
+    screen.fill((0, 0, 0))
     v = controlls()
-    draw_walls(screen, player_and_walls_cord, img1, img2)
+    draw_walls(screen, img1, img2)
     player.v_player = v
-    player.draw_player(screen, player_and_walls_cord)
+    player.draw_player(screen)
     player.our_lives(screen)
-    f = 0
+    obj = []
+    obj.append([player.mask, player.x_player-10, player.y_player-20])
     for e in enemies:
-        f+=1
-        tbul = e.draw_enemy(screen, player_and_walls_cord,f,player.x_player, player.y_player)
-        if tbul is not None:
-            bullet.append(tbul)
+        enemy = e.draw_enemy(screen, player.x_player, player.y_player)
+        if enemy is not None:
+            bullet.append(enemy)
+        if e.lives == 0:
+            enemies.remove(e)
+        else:
+            obj.append([e.mask, e.x_enemy-5, e.y_enemy-5])
     u = elozh.push(player.x_player, player.y_player)
+
     if u is not None:
         bullet.append(u)
     for b in bullet:
-        b.draw_shot(screen, bullet_cord, player_and_walls_cord, len(enemies))
-        if b.h_pl:
-            player.h_player -= 1
-        if b.h_en != 0:
-            enemies[b.h_en-1].lives -=1
-            if enemies[b.h_en-1].lives == 0:
-                enemies.remove(enemies[b.h_en-1])
-        if player.h_player == 0:
-            FINISHED = True
-
-
-        if ((datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond) - b.l_time >= 1000000 or b.live == 0:
+        b.draw_shot(screen)
+        t = 0
+        fin = False
+        if b.bul_x < 5 or b.bul_x > 1595 or b.bul_y < 7 or b.bul_y > 855:
+            bullet.remove(b)
+            fin = True
+        for ob in obj:
+            if b.check_shot(ob) and not fin:
+                if t == 0 and b.type != 0 and not fin:
+                    player.h_player -= 1
+                    if player.h_player == 0:
+                        FINISHED = True
+                    fin = True
+                    bullet.remove(b)
+                    break
+                elif t > 0 and b.type == 0 and not fin:
+                    enemies[t-1].lives -= 1
+                    fin = True
+                    bullet.remove(b)
+                    break
+            t += 1
+        if ((datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond) - b.l_time >= 1000000 and not fin:
             bullet.remove(b)
     pygame.display.update()
     for event in pygame.event.get():

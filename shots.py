@@ -21,81 +21,18 @@ class Shots:
             self.type = typ
             self.h_en = False
             self.h_pl = False
+            img = pg.image.load('ball.png')
+            self.img1 = pg.transform.scale(img, (5, 5))
+            self.mask = pg.mask.from_surface(self.img1)
 
-        def cleaning(self, cord_mas):
-            i, j = 0, 0
-            while i**2 + j**2 <= 49:
-                while i**2 + j**2 <= 49:
-                    cord_mas[round(self.bul_x) + i][round(self.bul_y) + j] = 0
-                    cord_mas[round(self.bul_x) - i][round(self.bul_y) + j] = 0
-                    cord_mas[round(self.bul_x) - i][round(self.bul_y) - j] = 0
-                    cord_mas[round(self.bul_x) + i][round(self.bul_y) - j] = 0
-                    j += 1
-                i += 1
-                j = 0
-
-        def draw_shot(self, screen, cord_mas, player_mas, t):
-            self.cleaning(cord_mas)
+        def draw_shot(self, screen):
             self.bul_x += self.bul_v[0]
             self.bul_y += self.bul_v[1]
-            pg.draw.circle(screen, (255, 0, 0), (self.bul_x, self.bul_y), 7)
-            self.move_shot(cord_mas, player_mas, t)
+            rect = pg.rect.Rect(self.bul_x-2.5, self.bul_y-2.5, 5, 5)
+            screen.blit(self.img1, rect)
 
-        def move_shot(self, cord_mas, player_mas, g):
-            i, j = 0, 0
-            h, h1, h2 = False, 0, False
-            while i**2 + j**2 <= 49 and not h:
-                while i**2 + j**2 <= 49 and not h:
-                    if (player_mas[round(self.bul_x) + i][round(self.bul_y) + j] == 1 or player_mas[round(self.bul_x) + i][round(self.bul_y) - j] == 1 or player_mas[round(self.bul_x) - i][round(self.bul_y) + j] == 1 or player_mas[round(self.bul_x) - i][round(self.bul_y) - j] == 1 ) and self.type == 1:
-                        i, j = 0, 0
-                        while i**2 + j**2 <= 49:
-                            while i**2 + j**2 <= 49:
-                                cord_mas[round(self.bul_x) + i][round(self.bul_y) + j] = 0
-                                cord_mas[round(self.bul_x) - i][round(self.bul_y) + j] = 0
-                                cord_mas[round(self.bul_x) - i][round(self.bul_y) - j] = 0
-                                cord_mas[round(self.bul_x) + i][round(self.bul_y) - j] = 0
-                                j += 1
-                            i += 1
-                            j = 0
-                        h = True
-                        h2 = True
-                    if (player_mas[round(self.bul_x) + i][round(self.bul_y) + j] == -1 or player_mas[round(self.bul_x) + i][round(self.bul_y) - j] == -1 or player_mas[round(self.bul_x) - i][round(self.bul_y) + j] == -1 or player_mas[round(self.bul_x) - i][round(self.bul_y) - j] == -1 ):
-                        i, j = 0, 0
-                        while i**2 + j**2 <= 49:
-                            while i**2 + j**2 <= 49:
-                                cord_mas[round(self.bul_x) + i][round(self.bul_y) + j] = 0
-                                cord_mas[round(self.bul_x) - i][round(self.bul_y) + j] = 0
-                                cord_mas[round(self.bul_x) - i][round(self.bul_y) - j] = 0
-                                cord_mas[round(self.bul_x) + i][round(self.bul_y) - j] = 0
-                                j += 1
-                            i += 1
-                            j = 0
-                        h = True
-                    for t in range(g):
-                        if (player_mas[round(self.bul_x) + i][round(self.bul_y) + j] == t+2 or player_mas[round(self.bul_x) + i][round(self.bul_y) - j] == t+2 or player_mas[round(self.bul_x) - i][round(self.bul_y) + j] == t+2 or player_mas[round(self.bul_x) - i][round(self.bul_y) - j] == t+2 ) and self.type == 0:
-                            i, j = 0, 0
-                            while i**2 + j**2 <= 49:
-                                while i**2 + j**2 <= 49:
-                                    cord_mas[round(self.bul_x) + i][round(self.bul_y) + j] = 0
-                                    cord_mas[round(self.bul_x) - i][round(self.bul_y) + j] = 0
-                                    cord_mas[round(self.bul_x) - i][round(self.bul_y) - j] = 0
-                                    cord_mas[round(self.bul_x) + i][round(self.bul_y) - j] = 0
-                                    j += 1
-                                i += 1
-                                j = 0
-                            h = True
-                            h1 = t+1
-                    if not h:
-                        cord_mas[round(self.bul_x) + i][round(self.bul_y) + j] = 1
-                        cord_mas[round(self.bul_x) - i][round(self.bul_y) + j] = 1
-                        cord_mas[round(self.bul_x) - i][round(self.bul_y) - j] = 1
-                        cord_mas[round(self.bul_x) + i][round(self.bul_y) - j] = 1
-                    j += 1
-                i += 1
-                j = 0
-            if h:
-                self.live = 0
-                if h1!=0:
-                    self.h_en = h1
-                if h2:
-                    self.h_pl = True
+        def check_shot(self, obj):
+            if self.mask.overlap_area(obj[0], (obj[1] - self.bul_x, obj[2] - self.bul_y)) > 0:
+                return True
+            else:
+                return False

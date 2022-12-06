@@ -40,6 +40,4 @@ class Push:
                 bullet.set_shot(player_x, player_y, self.sin, self.cos, 0)
                 self.last_shot = self.time
                 self.bullets-=1
-                return bullet 
-    
-        
+                return bullet

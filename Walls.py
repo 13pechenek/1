@@ -1,6 +1,6 @@
 import pygame as pg
 
-def draw_walls(screen, cord_mas, img1, img2):
+def draw_walls(screen, img1, img2):
     
 
     
