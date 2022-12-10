@@ -1,6 +1,8 @@
 import pygame
-from figs import *
+from player import *
+from enemy import *
 from pygame.locals import *
+ # from datetime import *  
 
 dir = {K_LEFT: (-5, 0), K_RIGHT: (5, 0), K_UP: (0, -5), K_DOWN: (0, 5)}
 
@@ -21,16 +23,17 @@ def controlls():
 
 
 
-class Push:
+class FirePlayer:  # FirePlayer
     def __init__(self):
         self.flag =False        
         self.bullets = 10
         self.time = (datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond
         self.last_shot = 0
+        # datetime.timestamp(datetime.now())  #
 
-    def push(self , player_x, player_y):
+    def fire(self , player_x, player_y):
         if pygame.mouse.get_pressed()[0]:
-            self.time = (datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond
+            self.time = datetime.timestamp(datetime.now())
             if self.time - self.last_shot >= 4000000 and self.bullets == 0:
                 self.bullets = 10
             if (self.time - self.last_shot >= 500000 and self.bullets != 0):
