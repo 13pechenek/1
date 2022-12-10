@@ -27,11 +27,7 @@ class Player:
         if self.y_player + self.v_player[1] > 10 and self.y_player + self.v_player[1] < 852:
             self.y_player += self.v_player[1]
         rect = pg.rect.Rect(self.x_player - 10, self.y_player - 20, 20, 40)
-<<<<<<< HEAD
         screen.blit(self.img, rect)
 
     
         
-=======
-        screen.blit(self.img, rect)
->>>>>>> 628561592966ea0ea19fd3e8607f824a6eb5d31b

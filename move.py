@@ -33,11 +33,7 @@ class FirePlayer:  # FirePlayer
 
     def fire(self , player_x, player_y):
         if pygame.mouse.get_pressed()[0]:
-<<<<<<< HEAD
-            self.time = datetime.timestamp(datetime.now())
-=======
             self.time =  (datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond
->>>>>>> 628561592966ea0ea19fd3e8607f824a6eb5d31b
             if self.time - self.last_shot >= 4000000 and self.bullets == 0:
                 self.bullets = 10
             if (self.time - self.last_shot >= 500000 and self.bullets != 0):

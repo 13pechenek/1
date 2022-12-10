@@ -13,9 +13,15 @@ screen = pygame.display.set_mode((1600, 862))
 clock = pygame.time.Clock()
 FINISHED = False
 player = Player()
-walls = WALLS()
 bullet = []
 enemies = []
+obstacles = []
+for i in range(3):
+    o = WALLS.horizontal_obstacles()
+    obstacles.append(o)
+for i in range(3):
+    o = WALLS.vertical_obstacles()
+    obstacles.append(o)
 for i in range(10):
     e = Enemy()
     enemies.append(e)
@@ -24,9 +30,10 @@ for i in range(10):
 while not FINISHED:
     clock.tick(60)
     screen.fill((0, 0, 0))
-    v = controlls()   #64734738948374971094141782479
-    walls.draw_walls(screen)
-    walls.draw_obstacles(screen)
+    v = controlls()
+    draw_walls(screen)
+    for o in obstacles:
+        o.draw_obstacles(screen)
     player.v_player = v
     player.draw_player(screen)
     player.our_lives(screen)
