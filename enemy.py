@@ -22,8 +22,16 @@ class Enemy:
         self.last_shot = 0
         self.mask = pg.mask.from_surface(self.Is)
 
-    def draw_enemy(self, screen, player_x, player_y):
+    def draw_enemy(self, screen, player_x, player_y, obstacles):
+
         self.v_enemy = self.enemy_move(player_x, player_y)
+
+
+        for obst in obstacles:
+            if self.mask.overlap_area(obst.mask, (obst.x_wall - self.x_enemy - self.v_enemy[0] + 5 , obst.y_wall - self.y_enemy + 5 )) > 0:
+                self.v_enemy = (0, self.v_enemy[1])
+            if self.mask.overlap_area(obst.mask, (obst.x_wall - self.x_enemy + 5 , obst.y_wall - self.v_enemy[1]- self.y_enemy + 5 )) > 0 :
+                self.v_enemy = (self.v_enemy[0], 0)
         self.x_enemy += self.v_enemy[0]
         self.y_enemy += self.v_enemy[1]
         rect = pg.rect.Rect(self.x_enemy-5, self.y_enemy-5, 10, 10)

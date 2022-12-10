@@ -35,12 +35,12 @@ while not FINISHED:
     for o in obstacles:
         o.draw_obstacles(screen)
     player.v_player = v
-    player.draw_player(screen)
+    player.draw_player(screen, obstacles)
     player.our_lives(screen)
     object = []
     object.append([player.mask, player.x_player-10, player.y_player-20])
     for e in enemies:
-        enemy = e.draw_enemy(screen, player.x_player, player.y_player)
+        enemy = e.draw_enemy(screen, player.x_player, player.y_player, obstacles)
         if enemy is not None:
             bullet.append(enemy)
         if e.lives == 0:
@@ -60,6 +60,12 @@ while not FINISHED:
         if BULLETS.bullet_x < 5 or BULLETS.bullet_x > 1595 or BULLETS.bullet_y < 7 or BULLETS.bullet_y > 855:
             bullet.remove(BULLETS)
             finish = True
+        for g in obstacles:
+            a = [g.mask, g.x_wall, g.y_wall]
+            if BULLETS.check_shot(a):
+                finish = True
+                bullet.remove(BULLETS)
+                break
         for obj in object:
             if BULLETS.check_shot(obj) and not finish:
                 if t == 0 and BULLETS.type != 0 and not finish:

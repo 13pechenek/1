@@ -11,12 +11,16 @@ class WALLS:
             self.y_wall = randint(100, 400)
             self.heith = 10
             self.width = randint(100, 500)
+            self.surface = pg.Surface((self.width, self.heith))
+            pg.draw.rect(self.surface, (255, 255, 0),
+                        (self.x_wall, self.y_wall, self.width, self.heith))
+            self.mask = pg.mask.from_surface(self.surface)
+
+                
 
         def draw_obstacles(self, screen):
-
-           
             pg.draw.rect(screen, (255, 255, 0),
-                        (self.x_wall, self.y_wall, self.width, self.heith))
+                        (self.x_wall, self.y_wall, self.width, self.heith))            
     class vertical_obstacles:
 
         def __init__(self):
@@ -25,6 +29,10 @@ class WALLS:
             self.y_wall = randint(100, 400)
             self.width = 10
             self.heith = randint(100, 500)
+            self.surface = pg.Surface((self.width, self.heith))
+            pg.draw.rect(self.surface, (255, 255, 0),
+                        (self.x_wall, self.y_wall, self.width, self.heith))
+            self.mask = pg.mask.from_surface(self.surface)
         def draw_obstacles(self, screen):
 
            
