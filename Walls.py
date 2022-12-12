@@ -6,7 +6,7 @@ class WALLS:
     class horizontal_obstacles:
 
         def __init__(self):
-            
+            self.type_w = 'h'
             self.x_wall = randint(100, 1400)
             self.y_wall = randint(100, 400)
             self.heith = 10
@@ -24,7 +24,7 @@ class WALLS:
     class vertical_obstacles:
 
         def __init__(self):
-            
+            self.type_w = 'v'
             self.x_wall = randint(100, 1400)
             self.y_wall = randint(100, 400)
             self.width = 10

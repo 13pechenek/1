@@ -22,7 +22,7 @@ for i in range(3):
 for i in range(3):
     o = WALLS.vertical_obstacles()
     obstacles.append(o)
-for i in range(10):
+for i in range(1):
     e = Enemy()
     enemies.append(e)
 
