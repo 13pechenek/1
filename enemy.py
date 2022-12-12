@@ -5,13 +5,13 @@ from shots import *
 
 
 class Enemy:
-    def __init__(self):
+    def __init__(self, mas):
         img = pg.image.load('images/enemy.jpg')
         self.Is = pg.transform.smoothscale(img, (10, 10))
-        self.x_enemy = randint(100, 1500)
-        self.y_enemy = randint(200, 600)
+        self.x_enemy = mas[0]
+        self.y_enemy = mas[1]
         self.v_enemy = (0, 0)
-        self.lives = 1
+        self.lives = mas[2]
         self.bullets = 20
         self.able_to = True
         self.time = ((

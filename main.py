@@ -4,6 +4,7 @@ from player import *
 from enemy import *
 from move import *
 from Walls import*
+from load import*
 
 
 pygame.init()
@@ -12,20 +13,11 @@ fire = FirePlayer()
 screen = pygame.display.set_mode((1600, 862))
 clock = pygame.time.Clock()
 FINISHED = False
-player = Player()
+
 bullet = []
 enemies = []
 obstacles = []
-for i in range(3):
-    o = WALLS.horizontal_obstacles()
-    obstacles.append(o)
-for i in range(3):
-    o = WALLS.vertical_obstacles()
-    obstacles.append(o)
-for i in range(1):
-    e = Enemy()
-    enemies.append(e)
-
+player = loading_positions('set.txt', enemies, obstacles)
 
 while not FINISHED:
     clock.tick(60)

@@ -5,12 +5,12 @@ from random import randint
 class WALLS:
     class horizontal_obstacles:
 
-        def __init__(self):
+        def __init__(self, mas):
             self.type_w = 'h'
-            self.x_wall = randint(100, 1400)
-            self.y_wall = randint(100, 400)
+            self.x_wall = mas[0]
+            self.y_wall = mas[1]
             self.heith = 10
-            self.width = randint(100, 500)
+            self.width = mas[2]
             self.surface = pg.Surface((self.width, self.heith))
             pg.draw.rect(self.surface, (255, 255, 0),
                         (self.x_wall, self.y_wall, self.width, self.heith))
@@ -23,12 +23,12 @@ class WALLS:
                         (self.x_wall, self.y_wall, self.width, self.heith))            
     class vertical_obstacles:
 
-        def __init__(self):
+        def __init__(self, mas):
             self.type_w = 'v'
-            self.x_wall = randint(100, 1400)
-            self.y_wall = randint(100, 400)
+            self.x_wall = mas[0]
+            self.y_wall = mas[1]
             self.width = 10
-            self.heith = randint(100, 500)
+            self.heith = mas[2]
             self.surface = pg.Surface((self.width, self.heith))
             pg.draw.rect(self.surface, (255, 255, 0),
                         (self.x_wall, self.y_wall, self.width, self.heith))

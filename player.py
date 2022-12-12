@@ -5,11 +5,11 @@ from shots import *
 
 
 class Player:
-    def __init__(self):
-        self.x_player = 300
-        self.y_player = 300
+    def __init__(self, mas):
+        self.x_player = mas[0]
+        self.y_player = mas[1]
         self.v_player = (0, 0)
-        self.health_player = 5
+        self.health_player = mas[2]
         self.img = pg.image.load('images/texture.bmp')
         img = pg.image.load('images/love1.png')
         self.img1 = pg.transform.scale(img, (40, 40))
