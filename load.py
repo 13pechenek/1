@@ -6,7 +6,6 @@ from Walls import*
 def loading_positions(name, enemies, obstacles):
     data_file = open(name, 'r')
     numbers = [int(x) for x in data_file.readline().split()]
-    print(numbers)
     a = [int(x) for x in data_file.readline().split()]
     player = Player(a)
     for i in range(numbers[0]):
