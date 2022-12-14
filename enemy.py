@@ -61,10 +61,10 @@ class Enemy:
         self.see_player = True
         for o in obstacles:
             if o.type_w == 'h' and t:
-                if abs(o.y_wall - self.y_enemy) < abs(player_y-self.y_enemy) and (o.y_wall - self.y_enemy)*(player_y-self.y_enemy)>0:
+                if abs(o.y_wall - self.y_enemy) < abs(player_y-self.y_enemy) and (o.y_wall - self.y_enemy)*(player_y-self.y_enemy)>0 :
                     g=[]
-                    tan_one = (self.x_enemy-o.x_wall)/(self.y_enemy-o.y_wall+o.heith)
-                    tan_two = (self.x_enemy-o.x_wall-o.width)/(self.y_enemy-o.y_wall+o.heith)
+                    tan_one = (self.x_enemy-o.x_wall)/(self.y_enemy-o.y_wall)
+                    tan_two = (self.x_enemy-o.x_wall-o.width)/(self.y_enemy-o.y_wall)
                     g.append(max(tan_one,tan_two))
                     g.append(min(tan_one,tan_two))
                     tan_player = (self.x_enemy-player_x)/(self.y_enemy-player_y)
