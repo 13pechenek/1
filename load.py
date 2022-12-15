@@ -1,10 +1,15 @@
+"""Данный файл содержит команду, считывающую положение и жизни врагов и игрока с файла,
+а также считывающую с файла положение стен из файла 
+"""
+
 from player import*
 from enemy import*
 from Walls import*
 
 
-def loading_positions(name, enemies, obstacles):
-    data_file = open(name, 'r')
+def loading_positions(file_name, enemies, obstacles):
+    """Считывание положений и жизней врагов и игрока, считывание положений стен из файла(file_name)"""
+    data_file = open(file_name, 'r')
     numbers = [int(x) for x in data_file.readline().split()]
     a = [int(x) for x in data_file.readline().split()]
     player = Player(a)

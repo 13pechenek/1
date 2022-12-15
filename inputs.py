@@ -1,3 +1,6 @@
+"""Файл с командами, отвечающими за выстрелы в заданных направлениях и управление движением игрока"""
+
+
 import pygame
 from player import *
 from enemy import *
@@ -8,6 +11,8 @@ dir = {K_LEFT: (-5, 0), K_RIGHT: (5, 0), K_UP: (0, -5), K_DOWN: (0, 5)}
 
 
 def controlls():
+    """Управление движением нажатием на стрелки"""
+    # player_v - скорость игрока
     player_v = (0, 0)
     if pygame.key.get_pressed()[K_LEFT]:
         player_v = (dir[K_LEFT][0], dir[K_LEFT][1])
@@ -23,8 +28,11 @@ def controlls():
 
 
 
-class FirePlayer:  # FirePlayer
+class FirePlayer: 
+    """Класс, отвечающий за стрельбу"""
     def __init__(self):
+        """Параметры по умолчанию
+        """
         self.flag =False        
         self.bullets = 10
         self.time = (datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond
@@ -32,6 +40,9 @@ class FirePlayer:  # FirePlayer
         # datetime.timestamp(datetime.now())  #
 
     def fire(self , player_x, player_y):
+        """1. Реализует перезарядку 2. При нажатии выпускает пули, летящие в указанном(нажатием) направлении; возвращает пули
+        player_x - х-координата игрока
+        player_y - у-координата игрока"""
         if pygame.mouse.get_pressed()[0]:
             self.time =  (datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond
             if self.time - self.last_shot >= 4000000 and self.bullets == 0:
