@@ -1,0 +1,1 @@
+tested on pygame 2.1.2
