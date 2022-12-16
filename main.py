@@ -15,6 +15,7 @@ screen = pygame.display.set_mode((1600, 862))
 clock = pygame.time.Clock()
 FINISHED = False
 
+back_ground = pygame.transform.smoothscale(pygame.image.load('images/backs.jpeg'),(1600,862))
 bullet = []
 enemies = []
 obstacles = []
@@ -22,7 +23,7 @@ player = loading_positions('level1.txt', enemies, obstacles)
 
 while not FINISHED:
     clock.tick(60)
-    screen.fill((0, 0, 0))
+    screen.blit(back_ground,(0,0))
     v = controlls()
     draw_walls(screen)
     for o in obstacles:
