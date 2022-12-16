@@ -1,10 +1,11 @@
+"""Здесь запускается игра"""
+
 import datetime
 import pygame
-from player import *
-from enemy import *
-from move import *
-from Walls import*
-from load import*
+from pygame.locals import K_ESCAPE, KEYDOWN 
+from inputs import controlls, FirePlayer
+from Walls import draw_walls
+from load import loading_positions
 
 
 pygame.init()
@@ -17,7 +18,7 @@ FINISHED = False
 bullet = []
 enemies = []
 obstacles = []
-player = loading_positions('level1.txt', enemies, obstacles)
+player = loading_positions('nu_ya.txt', enemies, obstacles)
 
 while not FINISHED:
     clock.tick(60)
