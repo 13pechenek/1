@@ -64,6 +64,7 @@ while not FINISHED:
                     player.health_player -= 1
                     if player.health_player == 0:
                         FINISHED = True
+                        G_O = True
                     finish = True
                     bullet.remove(BULLETS)
                     break
@@ -76,8 +77,27 @@ while not FINISHED:
         if ((datetime.datetime.today().hour * 60 * 60 + datetime.datetime.today().minute * 60 + datetime.datetime.today().second) * 1000000 + datetime.datetime.today().microsecond) - BULLETS.l_time >= 1000000 and not finish:
             bullet.remove(BULLETS)
     pygame.display.update()
+    if enemies == []:
+        G_O = False
+        FINISHED = True
     for event in pygame.event.get():
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 FINISHED = True
+                G_O = True
+FINISHED = False
+while not FINISHED:
+    if G_O == False:
+        img =pygame.transform.smoothscale(pygame.image.load('images/win.jpeg'),(1600,860))
+        screen.blit(img,(0,0))
+        pygame.display.update()
+    else:
+        img = pygame.transform.smoothscale(pygame.image.load('images/loose.png'),(1600,860))
+        screen.blit(img,(0,0))
+        pygame.display.update()
+    for event in pygame.event.get():
+        if event.type == KEYDOWN:
+            if event.key == K_ESCAPE:
+                FINISHED = True
+    
 pygame.quit()
