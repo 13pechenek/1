@@ -18,7 +18,7 @@ FINISHED = False
 bullet = []
 enemies = []
 obstacles = []
-player = loading_positions('nu_ya.txt', enemies, obstacles)
+player = loading_positions('level1.txt', enemies, obstacles)
 
 while not FINISHED:
     clock.tick(60)
