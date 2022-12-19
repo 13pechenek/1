@@ -32,9 +32,10 @@ while running:
                 running = False
     if pygame.mouse.get_pressed()[0]:
         if pygame.mouse.get_pos()[0] >= x and pygame.mouse.get_pos()[0] <= x + width and pygame.mouse.get_pos()[1] >= y and pygame.mouse.get_pos()[1] <= y + heith:
-            subprocess.run(["C:/Users/Сергей/AppData/Local/Microsoft/WindowsApps/python3.10.exe", "main.py"])
+            subprocess.run(["python", "main.py"])
             running = False
         if pygame.mouse.get_pos()[0] >= x1 and pygame.mouse.get_pos()[0] <= x1 + width and pygame.mouse.get_pos()[1] >= y1 and pygame.mouse.get_pos()[1] <= y1 + heith:
-            subprocess.run(["C:/Users/Сергей/AppData/Local/Microsoft/WindowsApps/python3.10.exe", "creator.py"])
             running = False
+            subprocess.run(["python", "creator.py"])
+            
 pygame.quit()
