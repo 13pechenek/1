@@ -1,7 +1,6 @@
 import subprocess
-#subprocess.run(["C:/Users/Сергей/AppData/Local/Microsoft/WindowsApps/python3.10.exe", "main.py"])
 import pygame
-from pygame.locals import*
+from pygame.locals import *
 
 pygame.init()
 screen = pygame.display.set_mode((700, 500))
@@ -31,11 +30,18 @@ while running:
             if event.key == K_ESCAPE:
                 running = False
     if pygame.mouse.get_pressed()[0]:
-        if pygame.mouse.get_pos()[0] >= x and pygame.mouse.get_pos()[0] <= x + width and pygame.mouse.get_pos()[1] >= y and pygame.mouse.get_pos()[1] <= y + heith:
+        if (
+                pygame.mouse.get_pos()[0] >= x
+                and pygame.mouse.get_pos()[0] <= x + width
+                and pygame.mouse.get_pos()[1] >= y
+                and pygame.mouse.get_pos()[1] <= y + heith):
             subprocess.run(["python", "main.py"])
             running = False
-        if pygame.mouse.get_pos()[0] >= x1 and pygame.mouse.get_pos()[0] <= x1 + width and pygame.mouse.get_pos()[1] >= y1 and pygame.mouse.get_pos()[1] <= y1 + heith:
+        if (
+                pygame.mouse.get_pos()[0] >= x1
+                and pygame.mouse.get_pos()[0] <= x1 + width
+                and pygame.mouse.get_pos()[1] >= y1
+                and pygame.mouse.get_pos()[1] <= y1 + heith):
             running = False
             subprocess.run(["python", "creator.py"])
-            
 pygame.quit()

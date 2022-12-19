@@ -12,9 +12,16 @@ class Player:
         self.v_player = (0, 0)
         self.health_player = mas[2]
         self.img = pg.image.load('images/texture.bmp')
-        img = pg.image.load('images/love1.png')
-        self.img1 = pg.transform.scale(img, (40, 40))
+        img_hurt = pg.image.load('images/love1.png')
+        self.img_hurt = pg.transform.scale(img_hurt, (40, 40))
+        img_bull = pg.image.load('images/bullet.png')
+        self.img_bull = pg.transform.scale(img_bull, (30, 100))
         self.mask = pg.mask.from_surface(self.img)
+
+    def draw_bullets(self, screen, bull_num):
+        for i in range(bull_num):
+            rect = pg.rect.Rect(1500 - i*30, 45, 30, 100)
+            screen.blit(self.img_bull, rect)
 
     def our_lives(self, screen):
         """Отобржает на экрани жизни:
@@ -22,7 +29,7 @@ class Player:
         """
         for i in range(self.health_player):
             rect = pg.rect.Rect(i*50+100, 45, 35, 35)
-            screen.blit(self.img1, rect)
+            screen.blit(self.img_hurt, rect)
 
     def draw_player(self, screen, obstacles):
         """1.Создает игрока

@@ -32,6 +32,7 @@ while not FINISHED:
     player.v_player = v
     player.draw_player(screen, obstacles)
     player.our_lives(screen)
+    player.draw_bullets(screen, fire.bullets)
     objects = []
     objects.append([player.mask, player.x_player-10, player.y_player-20])
     for e in enemies:
