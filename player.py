@@ -1,9 +1,6 @@
 """Данный файл содержит команды, отвечающие за поведение игрока"""
 
-import datetime
-from random import random, randint
 import pygame as pg
-from shots import *
 
 
 class Player:
@@ -28,23 +25,40 @@ class Player:
             screen.blit(self.img1, rect)
 
     def draw_player(self, screen, obstacles):
-        """1.Создает игрока 2.Проверяет игрока на столкновение со стенкой 3.Задает игроку скорость(движение);
+        """1.Создает игрока
+        2.Проверяет игрока на столкновение со стенкой
+        3.Задает игроку скорость(движение);
         screen - экран,
         obstacles - стенки"""
         for obst in obstacles:
-            if self.mask.overlap_area(obst.mask, (obst.x_wall - self.x_player - self.v_player[0] + 10 , obst.y_wall - self.y_player + 20)) > 0:
+            if self.mask.overlap_area(
+                    obst.mask,
+                    (
+                        obst.x_wall
+                        - self.x_player
+                        - self.v_player[0] + 10,
+                        obst.y_wall - self.y_player
+                        + 20)) > 0:
                 self.v_player = (0, self.v_player[1])
-            if self.mask.overlap_area(obst.mask, (obst.x_wall - self.x_player + 10 , obst.y_wall - self.v_player[1]- self.y_player + 20 )) > 0 :
+            if self.mask.overlap_area(
+                    obst.mask,
+                    (
+                        obst.x_wall
+                        - self.x_player
+                        + 10,
+                        obst.y_wall
+                        - self.v_player[1]
+                        - self.y_player
+                        + 20)) > 0:
                 self.v_player = (self.v_player[0], 0)
-
-        # В пределах нахождения игровой зоны: 
-        if self.x_player + self.v_player[0] > 50 and self.x_player + self.v_player[0] < 1550:
+        # В пределах нахождения игровой зоны:
+        if (
+                self.x_player + self.v_player[0] > 50
+                and self.x_player + self.v_player[0] < 1550):
             self.x_player += self.v_player[0]
-        if self.y_player + self.v_player[1] > 10 and self.y_player + self.v_player[1] < 852:
+        if (
+                self.y_player + self.v_player[1] > 10
+                and self.y_player + self.v_player[1] < 852):
             self.y_player += self.v_player[1]
         rect = pg.rect.Rect(self.x_player - 10, self.y_player - 20, 20, 40)
         screen.blit(self.img, rect)
-
-
-    
-        
