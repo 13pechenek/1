@@ -19,6 +19,7 @@ class Player:
         self.mask = pg.mask.from_surface(self.img)
 
     def draw_bullets(self, screen, bull_num):
+        """Отображает на экране количество пуль в запасе"""
         for i in range(bull_num):
             rect = pg.rect.Rect(1500 - i*30, 45, 30, 100)
             screen.blit(self.img_bull, rect)
